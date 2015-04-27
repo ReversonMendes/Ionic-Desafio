@@ -1,0 +1,19 @@
+<form ng-controller= "desafioController" >
+  <ion-list>
+    <label class="item item-input">
+      <span class="input-label">Texto</span>
+      <input type="text" name="textos" ng-model="texto" required placeholder="Texto" >
+    </label>
+    <label class="item item-input">
+      <span class="input-label">Data</span>
+      <input type="date" name="datas" ng-model="datas" required placeholder="yyyy-MM-dd" >
+    </label>
+  </ion-list>
+  <input type="button" class="button button-balanced button-block" ng-click="inserir()" value="Salvar">
+</form>
+<a class="button button-full button-positive" ng-click="registros()">Registros</a>
+<ion-list>
+  <ion-item ng-repeat="item in items" item="item">
+    {{item.id}} {{item.texto}} {{item.data}}
+  </ion-item>
+</ion-list>

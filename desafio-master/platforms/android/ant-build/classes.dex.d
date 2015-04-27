@@ -1,0 +1,20 @@
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes.dex : \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/org/apache/cordova/device/Device.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/org/pgsqlite/SQLitePlugin.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/org/pgsqlite/SQLitePlugin$DBRunner.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/org/pgsqlite/SQLitePlugin$DBQuery.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/org/pgsqlite/SQLitePlugin$Action.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/org/pgsqlite/SQLitePlugin$QueryType.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/org/pgsqlite/SQLitePlugin$1.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionic/keyboard/IonicKeyboard.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionic/keyboard/IonicKeyboard$1.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionic/keyboard/IonicKeyboard$2.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionic/keyboard/IonicKeyboard$3.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionicframework/desafio1963587/CordovaApp.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionicframework/desafio1963587/R$string.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionicframework/desafio1963587/R$xml.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionicframework/desafio1963587/R.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionicframework/desafio1963587/R$drawable.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionicframework/desafio1963587/R$attr.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/classes/com/ionicframework/desafio1963587/BuildConfig.class \
+/home/reverson/Cordova_Projetos/ionic/desafio_SemFirulas/platforms/android/ant-build/dexedLibs/classes-bdfb21ac17783c841320277bcf938508.jar \

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- cordova script -->
+    <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
+    <script src="cordova.js"></script>
+
+
+    <!-- O controlador do meu app -->
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="desafioApp" class="platform-android platform-cordova platform-webview">
+     <ion-header-bar class="bar-positive" >
+      <h1 class="title">Cadastro</h1>
+    </ion-header-bar>
+    <ion-content ng-controller= "desafioController" padding="true" class="has-header" >
+      <form >
+        <ion-list>
+          <label class="item item-input">
+              <span class="input-label">Texto</span>
+              <input type="text" name="textos" ng-model="texto" required placeholder="Texto" >
+          </label>
+          <label class="item item-input">
+              <span class="input-label">Data</span>
+              <input type="date" name="datas" ng-model="datas" required placeholder="yyyy-MM-dd" >
+          </label>
+      </ion-list>
+       <input type="button" class="button button-balanced button-block" ng-click="inserir()" value="Salvar">
+      </form>
+ 		  <a class="button button-full button-positive" ng-click="registros()">Registros</a>
+      <ion-list>
+        <ion-item ng-repeat="item in items"
+                  item="item"
+                  href="#/item/{{item.id}}" class="item-remove-animate">
+                  {{item.id}} {{item.texto}} {{item.data}}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </body>
+</html>
