@@ -1,0 +1,12 @@
+<ion-view title="Lista">
+    <ion-nav-buttons side="right">
+        <button class="button icon-right ion-plus button-clear " ng-click="cadastro()"></button>
+    </ion-nav-buttons>
+<ion-content padding="true" class="has-header">
+  <ion-list ng-controller = "listaController" >
+    <ion-item class="item-assertive " ng-repeat="item in lista" >
+      {{item.id}} {{item.texto}} {{item.data|date:'dd/MM/yyyy'}}
+    </ion-item>
+  </ion-list>
+</ion-content>
+</ion-view>
