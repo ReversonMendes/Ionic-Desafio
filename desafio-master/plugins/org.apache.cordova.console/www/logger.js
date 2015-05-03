@@ -197,7 +197,7 @@ function logWithArgs(level, args) {
 
 // return the correct formatString for an object
 function formatStringForMessage(message) {
-    return (typeof message === "string") ? "" : "%o";
+    return (typeof message === "string") ? "" : "%o"; 
 }
 
 /**

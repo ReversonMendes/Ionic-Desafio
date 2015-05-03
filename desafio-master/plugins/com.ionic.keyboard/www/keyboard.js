@@ -11,7 +11,7 @@ Keyboard.hideKeyboardAccessoryBar = function(hide) {
     exec(null, null, "Keyboard", "hideKeyboardAccessoryBar", [hide]);
 };
 
-Keyboard.close = function() {
+Keyboard.close = function() {	
     exec(null, null, "Keyboard", "close", []);
 };
 

@@ -47,9 +47,9 @@ module.exports = {
     		//...so cache it per-install
     		localSettings.values.deviceId = deviceId;
     	}
-
+    	
     	var versionString = window.clientInformation.userAgent.match(/Windows NT ([0-9.]+)/)[1];
-
+    	
     	(function(self){
     		var ROOT_CONTAINER = "{00000000-0000-0000-FFFF-FFFFFFFFFFFF}";
     		var DEVICE_CLASS_KEY = "{A45C254E-DF1C-4EFD-8020-67D146A850E0},10";
@@ -59,7 +59,7 @@ module.exports = {
     		var DEVICE_DRIVER_VERSION_KEY = "{A8B865DD-2E3D-4094-AD97-E593A70C75D6},3";
     		var pnpObject = Windows.Devices.Enumeration.Pnp.PnpObject;
     		pnpObject.findAllAsync(Windows.Devices.Enumeration.Pnp.PnpObjectType.device, [DEVICE_DRIVER_VERSION_KEY, DEVICE_CLASS_KEY], ROOT_CONTAINER_QUERY).then(function(rootDevices) {
-
+    
     			for (var i = 0; i < rootDevices.length; i++) {
     				var rootDevice = rootDevices[i];
     				if (!rootDevice.properties) continue;

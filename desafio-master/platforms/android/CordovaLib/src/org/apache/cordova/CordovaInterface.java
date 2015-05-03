@@ -54,7 +54,7 @@ public interface CordovaInterface {
      * @return the Activity
      */
     public abstract Activity getActivity();
-
+    
 
     /**
      * Called when a message is sent to plugin.
@@ -64,7 +64,7 @@ public interface CordovaInterface {
      * @return              Object or null
      */
     public Object onMessage(String id, Object data);
-
+    
     /**
      * Returns a shared thread pool that can be used for background tasks.
      */

@@ -18,12 +18,12 @@ angular.module('desafioApp.cadastroCtrl', [])
     //limpa
     $scope.item = {};
   }
-
+  
    //Função inserir  = inclui registro no banco
   $scope.inserirUsuario = function(usuario){
     var insert = "INSERT INTO USUARIO (nome,email,usuario, senha) VALUES (?,?,?,?)";
     var select = 'SELECT * FROM USUARIO WHERE usuario = ?';
-
+    
     $cordovaSQLite.execute(db, select,[$scope.usuario.usuario]).then(function(result){
       //Valida se já existe um usuário com o mesmo nome.
       if(result.rows.length > 0 ){
@@ -51,7 +51,7 @@ angular.module('desafioApp.cadastroCtrl', [])
     $cordovaSQLite.execute(db, select,[$stateParams.usuario]).then(function(result){
       if(result.rows.length > 0 ){
         $scope.usuario = {};
-        $scope.usuario = {id: result.rows.item(0).id,
+        $scope.usuario = {id: result.rows.item(0).id, 
                                  nome: result.rows.item(0).nome,
                                  email: result.rows.item(0).email,
                                  usuario: result.rows.item(0).usuario,
@@ -68,9 +68,9 @@ angular.module('desafioApp.cadastroCtrl', [])
 
   $scope.atualizarConta = function(usuario){
     var update = "UPDATE USUARIO SET nome = ?, email = ?, usuario = ?, senha = ? WHERE ID = ?";
-    var select = 'SELECT * FROM USUARIO WHERE usuario = ?';
-
-    $cordovaSQLite.execute(db, select,[$scope.usuario.usuario]).then(function(result){
+    var select = 'SELECT * FROM USUARIO WHERE usuario = ? AND id <> ?';
+    
+    $cordovaSQLite.execute(db, select,[$scope.usuario.usuario,$scope.usuario.id]).then(function(result){
       //Valida se já existe um usuário com o mesmo nome.
       if(result.rows.length > 0 ){
         $ionicLoading.show({ template: 'Esse nome de Usuário já existe!', duration: 2000 });
@@ -96,5 +96,5 @@ angular.module('desafioApp.cadastroCtrl', [])
   //Executa Carrega usuario
   $ionicPlatform.ready(function() {
     $scope.carregaUsuario();
-  });
+  });  
 });

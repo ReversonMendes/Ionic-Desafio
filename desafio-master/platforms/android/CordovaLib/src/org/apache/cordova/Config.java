@@ -47,48 +47,6 @@ public class Config {
         }
     }
 
-    /**
-     * Add entry to approved list of URLs (whitelist)
-     *
-     * @param origin        URL regular expression to allow
-     * @param subdomains    T=include all subdomains under origin
-     */
-    public static void addWhiteListEntry(String origin, boolean subdomains) {
-        if (parser == null) {
-            Log.e(TAG, "Config was not initialised. Did you forget to Config.init(this)?");
-            return;
-        }
-        parser.getInternalWhitelist().addWhiteListEntry(origin, subdomains);
-    }
-
-    /**
-     * Determine if URL is in approved list of URLs to load.
-     *
-     * @param url
-     * @return true if whitelisted
-     */
-    public static boolean isUrlWhiteListed(String url) {
-        if (parser == null) {
-            Log.e(TAG, "Config was not initialised. Did you forget to Config.init(this)?");
-            return false;
-        }
-        return parser.getInternalWhitelist().isUrlWhiteListed(url);
-    }
-
-    /**
-     * Determine if URL is in approved list of URLs to launch external applications.
-     *
-     * @param url
-     * @return true if whitelisted
-     */
-    public static boolean isUrlExternallyWhiteListed(String url) {
-        if (parser == null) {
-            Log.e(TAG, "Config was not initialised. Did you forget to Config.init(this)?");
-            return false;
-        }
-        return parser.getExternalWhitelist().isUrlWhiteListed(url);
-    }
-
     public static String getStartUrl() {
         if (parser == null) {
             return "file:///android_asset/www/index.html";
@@ -100,18 +58,10 @@ public class Config {
         return parser.getPreferences().getString("errorurl", null);
     }
 
-    public static Whitelist getWhitelist() {
-        return parser.getInternalWhitelist();
-    }
-
-    public static Whitelist getExternalWhitelist() {
-        return parser.getExternalWhitelist();
-    }
-
     public static List<PluginEntry> getPluginEntries() {
         return parser.getPluginEntries();
     }
-
+    
     public static CordovaPreferences getPreferences() {
         return parser.getPreferences();
     }

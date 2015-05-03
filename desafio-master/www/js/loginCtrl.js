@@ -14,10 +14,18 @@ angular.module('desafioApp.loginCtrl', [])
   });
 
   // Abre o login modal
-  $scope.login = function() {
+  $scope.login = function() {  
+       // Create the login modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/login.html', {
+    scope: $scope,
+    backdropClickToClose: false,
+    hardwareBackButtonClose: false
+  }).then(function(modal) {
+    $scope.modal = modal;
     $scope.modal.show();
+  });
   };
-
+  
     //Executa abertura
   $ionicPlatform.ready(function() {
     $scope.login();
