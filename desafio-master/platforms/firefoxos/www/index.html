@@ -17,35 +17,13 @@
 
     <!-- O controlador do meu app -->
     <script src="js/app.js"></script>
+    <script src="js/cadastroCtrl.js"></script>
+    <script src="js/listaCtrl.js"></script>
+    <script src="js/loginCtrl.js"></script>
   </head>
   <body ng-app="desafioApp" class="platform-firefoxos platform-cordova platform-webview">
-     <ion-header-bar class="bar-positive" >
-      <h1 class="title">Cadastro</h1>
-    </ion-header-bar>
-      <ion-content ng-controller= "desafioController" >
-      <!--	<div class="list item-button">
-            <label class="list item-input">
-              <span class="input">Texto: </span>
-              <input type="text" placeholder="Texto" name="texto">
-              <span class="input">Data:  </span>
-              <input type="date" name="data">
-               <button class="button button-icon icon ion-ios-plus" ng-click = "inserir('texto','data')">
-              </button>
-
-               <button class="button button-icon icon ion-ios-plus" ng-click = "select('texto','data')">
-              </button>
-            </label>
-        </div> -->
-        <a class="button button-full button-positive" ng-click="inserir('TO FUDIDO','24/03/2015')">Insert</a>
-       <a class="button button-full button-positive" ng-click="select('TO FUDIDO')">Select</a>
-        <ion-list>
-        <ion-item ng-repeat="item in items"
-                  item="item"
-                  href="#/item/{{item.id}}" class="item-remove-animate">
-                  Item {{item.texto}}
-        </ion-item>
-      </ion-list>
-
-      </ion-content>
+      <ion-nav-bar class="bar-positive">
+      </ion-nav-bar>
+    <ion-nav-view></ion-nav-view>
   </body>
 </html>

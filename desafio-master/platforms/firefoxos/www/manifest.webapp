@@ -10,8 +10,5 @@
         "name": "Ionic Framework Team",
         "url": "http://ionicframework.com/"
     },
-    "icons": {
-        "60": "/icon/icon-60.png",
-        "128": "/icon/icon-128.png"
-    }
+    "icons": {}
 }

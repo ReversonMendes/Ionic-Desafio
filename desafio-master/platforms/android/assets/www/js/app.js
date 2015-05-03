@@ -1,6 +1,8 @@
 var db = null;
 
-var desafio  = angular.module('desafioApp', ['ionic', 'ngCordova'])
+var lista = []; //Array com os registros
+
+var desafio = angular.module('desafioApp', ['ionic', 'ngCordova','desafioApp.cadastroCtrl','desafioApp.listaCtrl','desafioApp.loginCtrl'])
 
 .run(function($ionicPlatform, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
@@ -13,83 +15,78 @@ var desafio  = angular.module('desafioApp', ['ionic', 'ngCordova'])
 
     //inicia o banco sql
     db = $cordovaSQLite.openDB({ name: "desafio.db"});
-
-    $cordovaSQLite.execute(db,"DROP TABLE IF EXISTS desafio");
+    //$cordovaSQLite.execute(db,"DROP TABLE IF EXISTS desafio");
+    //$cordovaSQLite.execute(db,"DROP TABLE IF EXISTS usuario");
     //Cria a tabela  caso não estiver criada
     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS desafio (id integer primary key, texto text, data text)");
+     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS usuario (id integer primary key, nome text, email text, usuario text, senha text)");
     console.log("TABELA CRIADA");
   });
 });
 
-//Controla o banco
-desafio.controller("desafioController", function($scope, $cordovaSQLite, $ionicLoading){
-    $scope.texto = ''; //Variavel recebido do input
-    $scope.datas = ''; //Variavel recebido do input
-    $scope.items = []; //Array com os registros
+//Controle de rotas
+desafio.config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider
 
+		.state('app', {
+		    url: "/app",
+		    abstract: true,
+		    templateUrl: "templates/menu.html",
+		    controller: 'loginController'
+		  })
 
-  //Função Busca todos registros
-  $scope.registros = function(){
-    var select = "SELECT id, texto , data FROM desafio";
-    //executa o select e imprime no log caso encontrou alguma linha ou se aconteceu algum erro
-    $cordovaSQLite.execute(db, select,[]).then(function(result){
-      if (result.rows.length > 0 ){
-        console.log("SELECIONADO ->" + result.rows.item(0).texto + " " + result.rows.item(0).data);
-        //Mostra os resultados
-        for (var i = 0; i < result.rows.length ; i++) {
-            console.log("SELECIONADO ->" + result.rows.item(i).texto + " " + result.rows.item(i).data +"inicio id: "+i);
-            $scope.items.push(result.rows.item(i));
-        }
-       // alert(JSON.stringify($scope.items));
-        console.log("SELECIONADO ->" + result.rows.item(i).texto + " " + result.rows.item(i).data +"Fim id: "+i);
-        return $scope.items;
-      }else{
-        console.log("NENHUMA LINHA ENCONTRADA.");
-      }
-    }, function(error){
-        console.log(error);
-    });
-  }
+      .state('login', {
+          url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'loginController'
+        })
 
-  //Função inserir  = inclui registro no banco
-  $scope.inserir = function(){
-    console.log($scope.texto)
-    console.log($scope.datas)
-    var insert = "INSERT INTO desafio ( texto, data) VALUES (?,?)";
-    //executa o insert e imprime no log quando inserir ou se aconteceu algum erro.
-    $cordovaSQLite.execute(db, insert, [$scope.texto, $scope.datas]).then(function(result){
-      console.log("INSERIDO id ->" + result.insertId);
-      $ionicLoading.show({ template: 'Item Added!', noBackdrop: true, duration: 2000 });
-      $scope.texto = "";
-      $scope.datas = "";
-    }, function(error){
-      console.log(error);
-    });
-    $desafio.registros();
-  }
+      .state('app.conta', {
+          url: '/conta/:usuario',
+          views: {
+            'menuContent': {
+              templateUrl: 'templates/conta.html',
+              controller: 'CadastroController'
+            }
+          }
+        })
 
-  //Função select = Executa uma consulta no banco
-  $scope.select = function(texto){
-    console.log("ENTROU no SELECT = " + texto );
-    var select = "SELECT texto , data FROM desafio WHERE texto = ?";
-    //executa o select e imprime no log caso encontrou alguma linha ou se aconteceu algum erro
-    $cordovaSQLite.execute(db, select,[texto]).then(function(result){
-      if (result.rows.length > 0 ){
-        console.log("SELECIONADO ->" + result.rows.item(0).texto + " " + result.rows.item(0).data);
-        //Mostra os resultados
-        for (var i = 0; i < result.rows.length ; i++) {
-            console.log("SELECIONADO ->" + result.rows.item(i).texto + " " + result.rows.item(i).data +"inicio id: "+i);
-            $scope.items.push(result.rows.item(i));
-        }
-        alert(JSON.stringify($scope.items));
-        console.log("SELECIONADO ->" + result.rows.item(i).texto + " " + result.rows.item(i).data +"Fim id: "+i);
-        return $scope.items;
-      }else{
-        console.log("NENHUMA LINHA ENCONTRADA.");
-      }
-    }, function(error){
-        console.log(error);
-    });
-  }
+       .state('app.lista', {
+            url: '/lista',
+            views: {
+     			'menuContent': {
+            		templateUrl: 'templates/lista.html',
+            		controller: 'listaController'
+            	}
+            }
+        })
 
+         .state('app.cadastroItem', {
+            url: '/cadastroItem',
+            views: {
+     			'menuContent': {
+            templateUrl: 'templates/cadastro_item.html',
+            controller: 'CadastroController'
+		        }
+		    }
+        })
+
+        .state('cadastroUsuario', {
+            url: '/cadastroUsuario',
+            templateUrl: 'templates/cadastro_usuario.html',
+            controller: 'CadastroController'
+        })
+
+        .state('app.sobre', {
+            url: '/sobre',
+            views: {
+     			'menuContent': {
+            templateUrl: 'templates/sobre.html',
+            controller: 'CadastroController'
+		        }
+		    }
+        })
+    	$urlRouterProvider.otherwise('/app/lista');
 });
+
+
