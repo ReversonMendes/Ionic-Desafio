@@ -4,7 +4,7 @@
     </ion-nav-buttons>
 <ion-content padding="true" class="has-header">
   <ion-list ng-controller = "listaController" >
-    <ion-item ng-repeat="item in lista" >
+    <ion-item class="item-assertive " ng-repeat="item in lista" >
       {{item.id}} {{item.texto}} {{item.data|date:'dd/MM/yyyy'}}
     </ion-item>
   </ion-list>

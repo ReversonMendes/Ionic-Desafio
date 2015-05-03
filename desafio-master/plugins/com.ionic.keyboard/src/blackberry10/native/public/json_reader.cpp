@@ -30,14 +30,14 @@ Features::Features()
 }
 
 
-Features
+Features 
 Features::all()
 {
    return Features();
 }
 
 
-Features
+Features 
 Features::strictMode()
 {
    Features features;
@@ -50,21 +50,21 @@ Features::strictMode()
 // ////////////////////////////////
 
 
-static inline bool
+static inline bool 
 in( Reader::Char c, Reader::Char c1, Reader::Char c2, Reader::Char c3, Reader::Char c4 )
 {
    return c == c1  ||  c == c2  ||  c == c3  ||  c == c4;
 }
 
-static inline bool
+static inline bool 
 in( Reader::Char c, Reader::Char c1, Reader::Char c2, Reader::Char c3, Reader::Char c4, Reader::Char c5 )
 {
    return c == c1  ||  c == c2  ||  c == c3  ||  c == c4  ||  c == c5;
 }
 
 
-static bool
-containsNewLine( Reader::Location begin,
+static bool 
+containsNewLine( Reader::Location begin, 
                  Reader::Location end )
 {
    for ( ;begin < end; ++begin )
@@ -76,28 +76,28 @@ containsNewLine( Reader::Location begin,
 static std::string codePointToUTF8(unsigned int cp)
 {
    std::string result;
-
+   
    // based on description from http://en.wikipedia.org/wiki/UTF-8
 
-   if (cp <= 0x7f)
+   if (cp <= 0x7f) 
    {
       result.resize(1);
       result[0] = static_cast<char>(cp);
-   }
-   else if (cp <= 0x7FF)
+   } 
+   else if (cp <= 0x7FF) 
    {
       result.resize(2);
       result[1] = static_cast<char>(0x80 | (0x3f & cp));
       result[0] = static_cast<char>(0xC0 | (0x1f & (cp >> 6)));
-   }
-   else if (cp <= 0xFFFF)
+   } 
+   else if (cp <= 0xFFFF) 
    {
       result.resize(3);
       result[2] = static_cast<char>(0x80 | (0x3f & cp));
       result[1] = 0x80 | static_cast<char>((0x3f & (cp >> 6)));
       result[0] = 0xE0 | static_cast<char>((0xf & (cp >> 12)));
    }
-   else if (cp <= 0x10FFFF)
+   else if (cp <= 0x10FFFF) 
    {
       result.resize(4);
       result[3] = static_cast<char>(0x80 | (0x3f & cp));
@@ -126,7 +126,7 @@ Reader::Reader( const Features &features )
 
 
 bool
-Reader::parse( const std::string &document,
+Reader::parse( const std::string &document, 
                Value &root,
                bool collectComments )
 {
@@ -154,8 +154,8 @@ Reader::parse( std::istream& sin,
    return parse( doc, root, collectComments );
 }
 
-bool
-Reader::parse( const char *beginDoc, const char *endDoc,
+bool 
+Reader::parse( const char *beginDoc, const char *endDoc, 
                Value &root,
                bool collectComments )
 {
@@ -175,7 +175,7 @@ Reader::parse( const char *beginDoc, const char *endDoc,
    while ( !nodes_.empty() )
       nodes_.pop();
    nodes_.push( &root );
-
+   
    bool successful = readValue();
    Token token;
    skipCommentTokens( token );
@@ -249,7 +249,7 @@ Reader::readValue()
 }
 
 
-void
+void 
 Reader::skipCommentTokens( Token &token )
 {
    if ( features_.allowComments_ )
@@ -267,7 +267,7 @@ Reader::skipCommentTokens( Token &token )
 }
 
 
-bool
+bool 
 Reader::expectToken( TokenType type, Token &token, const char *message )
 {
    readToken( token );
@@ -277,7 +277,7 @@ Reader::expectToken( TokenType type, Token &token, const char *message )
 }
 
 
-bool
+bool 
 Reader::readToken( Token &token )
 {
    skipSpaces();
@@ -352,7 +352,7 @@ Reader::readToken( Token &token )
 }
 
 
-void
+void 
 Reader::skipSpaces()
 {
    while ( current_ != end_ )
@@ -366,8 +366,8 @@ Reader::skipSpaces()
 }
 
 
-bool
-Reader::match( Location pattern,
+bool 
+Reader::match( Location pattern, 
                int patternLength )
 {
    if ( end_ - current_ < patternLength )
@@ -409,9 +409,9 @@ Reader::readComment()
 }
 
 
-void
-Reader::addComment( Location begin,
-                    Location end,
+void 
+Reader::addComment( Location begin, 
+                    Location end, 
                     CommentPlacement placement )
 {
    assert( collectComments_ );
@@ -429,7 +429,7 @@ Reader::addComment( Location begin,
 }
 
 
-bool
+bool 
 Reader::readCStyleComment()
 {
    while ( current_ != end_ )
@@ -442,7 +442,7 @@ Reader::readCStyleComment()
 }
 
 
-bool
+bool 
 Reader::readCppStyleComment()
 {
    while ( current_ != end_ )
@@ -455,7 +455,7 @@ Reader::readCppStyleComment()
 }
 
 
-void
+void 
 Reader::readNumber()
 {
    while ( current_ != end_ )
@@ -483,7 +483,7 @@ Reader::readString()
 }
 
 
-bool
+bool 
 Reader::readObject( Token &tokenStart )
 {
    Token tokenName;
@@ -500,7 +500,7 @@ Reader::readObject( Token &tokenStart )
          return true;
       if ( tokenName.type_ != tokenString )
          break;
-
+      
       name = "";
       if ( !decodeString( tokenName, name ) )
          return recoverFromError( tokenObjectEnd );
@@ -508,8 +508,8 @@ Reader::readObject( Token &tokenStart )
       Token colon;
       if ( !readToken( colon ) ||  colon.type_ != tokenMemberSeparator )
       {
-         return addErrorAndRecover( "Missing ':' after object member name",
-                                    colon,
+         return addErrorAndRecover( "Missing ':' after object member name", 
+                                    colon, 
                                     tokenObjectEnd );
       }
       Value &value = currentValue()[ name ];
@@ -521,12 +521,12 @@ Reader::readObject( Token &tokenStart )
 
       Token comma;
       if ( !readToken( comma )
-            ||  ( comma.type_ != tokenObjectEnd  &&
+            ||  ( comma.type_ != tokenObjectEnd  &&  
                   comma.type_ != tokenArraySeparator &&
 		  comma.type_ != tokenComment ) )
       {
-         return addErrorAndRecover( "Missing ',' or '}' in object declaration",
-                                    comma,
+         return addErrorAndRecover( "Missing ',' or '}' in object declaration", 
+                                    comma, 
                                     tokenObjectEnd );
       }
       bool finalizeTokenOk = true;
@@ -536,13 +536,13 @@ Reader::readObject( Token &tokenStart )
       if ( comma.type_ == tokenObjectEnd )
          return true;
    }
-   return addErrorAndRecover( "Missing '}' or object member name",
-                              tokenName,
+   return addErrorAndRecover( "Missing '}' or object member name", 
+                              tokenName, 
                               tokenObjectEnd );
 }
 
 
-bool
+bool 
 Reader::readArray( Token &tokenStart )
 {
    currentValue() = Value( arrayValue );
@@ -570,12 +570,12 @@ Reader::readArray( Token &tokenStart )
       {
          ok = readToken( token );
       }
-      bool badTokenType = ( token.type_ == tokenArraySeparator  &&
+      bool badTokenType = ( token.type_ == tokenArraySeparator  &&  
                             token.type_ == tokenArrayEnd );
       if ( !ok  ||  badTokenType )
       {
-         return addErrorAndRecover( "Missing ',' or ']' in array declaration",
-                                    token,
+         return addErrorAndRecover( "Missing ',' or ']' in array declaration", 
+                                    token, 
                                     tokenArrayEnd );
       }
       if ( token.type_ == tokenArrayEnd )
@@ -585,14 +585,14 @@ Reader::readArray( Token &tokenStart )
 }
 
 
-bool
+bool 
 Reader::decodeNumber( Token &token )
 {
    bool isDouble = false;
    for ( Location inspect = token.start_; inspect != token.end_; ++inspect )
    {
-      isDouble = isDouble
-                 ||  in( *inspect, '.', 'e', 'E', '+' )
+      isDouble = isDouble  
+                 ||  in( *inspect, '.', 'e', 'E', '+' )  
                  ||  ( *inspect == '-'  &&  inspect != token.start_ );
    }
    if ( isDouble )
@@ -601,7 +601,7 @@ Reader::decodeNumber( Token &token )
    bool isNegative = *current == '-';
    if ( isNegative )
       ++current;
-   Value::UInt threshold = (isNegative ? Value::UInt(-Value::minInt)
+   Value::UInt threshold = (isNegative ? Value::UInt(-Value::minInt) 
                                        : Value::maxUInt) / 10;
    Value::UInt value = 0;
    while ( current < token.end_ )
@@ -623,7 +623,7 @@ Reader::decodeNumber( Token &token )
 }
 
 
-bool
+bool 
 Reader::decodeDouble( Token &token )
 {
    double value = 0;
@@ -650,7 +650,7 @@ Reader::decodeDouble( Token &token )
 }
 
 
-bool
+bool 
 Reader::decodeString( Token &token )
 {
    std::string decoded;
@@ -661,7 +661,7 @@ Reader::decodeString( Token &token )
 }
 
 
-bool
+bool 
 Reader::decodeString( Token &token, std::string &decoded )
 {
    decoded.reserve( token.end_ - token.start_ - 2 );
@@ -708,9 +708,9 @@ Reader::decodeString( Token &token, std::string &decoded )
 }
 
 bool
-Reader::decodeUnicodeCodePoint( Token &token,
-                                     Location &current,
-                                     Location end,
+Reader::decodeUnicodeCodePoint( Token &token, 
+                                     Location &current, 
+                                     Location end, 
                                      unsigned int &unicode )
 {
 
@@ -727,20 +727,20 @@ Reader::decodeUnicodeCodePoint( Token &token,
          if (decodeUnicodeEscapeSequence( token, current, end, surrogatePair ))
          {
             unicode = 0x10000 + ((unicode & 0x3FF) << 10) + (surrogatePair & 0x3FF);
-         }
+         } 
          else
             return false;
-      }
+      } 
       else
          return addError( "expecting another \\u token to begin the second half of a unicode surrogate pair", token, current );
    }
    return true;
 }
 
-bool
-Reader::decodeUnicodeEscapeSequence( Token &token,
-                                     Location &current,
-                                     Location end,
+bool 
+Reader::decodeUnicodeEscapeSequence( Token &token, 
+                                     Location &current, 
+                                     Location end, 
                                      unsigned int &unicode )
 {
    if ( end - current < 4 )
@@ -763,8 +763,8 @@ Reader::decodeUnicodeEscapeSequence( Token &token,
 }
 
 
-bool
-Reader::addError( const std::string &message,
+bool 
+Reader::addError( const std::string &message, 
                   Token &token,
                   Location extra )
 {
@@ -777,7 +777,7 @@ Reader::addError( const std::string &message,
 }
 
 
-bool
+bool 
 Reader::recoverFromError( TokenType skipUntilToken )
 {
    int errorCount = int(errors_.size());
@@ -794,8 +794,8 @@ Reader::recoverFromError( TokenType skipUntilToken )
 }
 
 
-bool
-Reader::addErrorAndRecover( const std::string &message,
+bool 
+Reader::addErrorAndRecover( const std::string &message, 
                             Token &token,
                             TokenType skipUntilToken )
 {
@@ -811,7 +811,7 @@ Reader::currentValue()
 }
 
 
-Reader::Char
+Reader::Char 
 Reader::getNextChar()
 {
    if ( current_ == end_ )
@@ -820,7 +820,7 @@ Reader::getNextChar()
 }
 
 
-void
+void 
 Reader::getLocationLineAndColumn( Location location,
                                   int &line,
                                   int &column ) const
@@ -861,7 +861,7 @@ Reader::getLocationLineAndColumn( Location location ) const
 }
 
 
-std::string
+std::string 
 Reader::getFormatedErrorMessages() const
 {
    std::string formattedMessage;

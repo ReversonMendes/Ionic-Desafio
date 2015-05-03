@@ -28,7 +28,7 @@ angular.module('desafioApp.listaCtrl', [])
   console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD.");
     $scope.registros();
   });
-
+  
     $scope.cadastro = function(){
     $location.path("/app/cadastroItem");
   }

@@ -88,7 +88,7 @@ public class Device extends CordovaPlugin {
 
     /**
      * Get the OS name.
-     *
+     * 
      * @return
      */
     public String getPlatform() {
@@ -148,7 +148,7 @@ public class Device extends CordovaPlugin {
 
     /**
      * Function to check if the device is manufactured by Amazon
-     *
+     * 
      * @return
      */
     public boolean isAmazonDevice() {

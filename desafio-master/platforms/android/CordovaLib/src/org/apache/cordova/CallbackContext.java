@@ -38,15 +38,15 @@ public class CallbackContext {
         this.callbackId = callbackId;
         this.webView = webView;
     }
-
+    
     public boolean isFinished() {
         return finished;
     }
-
+    
     public boolean isChangingThreads() {
         return changingThreads > 0;
     }
-
+    
     public String getCallbackId() {
         return callbackId;
     }
@@ -98,7 +98,7 @@ public class CallbackContext {
     public void success(byte[] message) {
         sendPluginResult(new PluginResult(PluginResult.Status.OK, message));
     }
-
+    
     /**
      * Helper for success callbacks that just returns the Status.OK by default
      *

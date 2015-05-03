@@ -15,20 +15,20 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/com.brodysoft.sqlitePlugin/www/SQLitePlugin.js",
-        "id": "com.brodysoft.sqlitePlugin.SQLitePlugin",
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
         "clobbers": [
-            "SQLitePlugin"
+            "navigator.splashscreen"
         ]
     }
 ];
-module.exports.metadata =
+module.exports.metadata = 
 // TOP OF METADATA
 {
     "com.ionic.keyboard": "1.0.4",
     "org.apache.cordova.console": "0.2.13",
     "org.apache.cordova.device": "0.3.0",
-    "com.brodysoft.sqlitePlugin": "1.0.6"
+    "cordova-plugin-splashscreen": "2.0.0"
 }
 // BOTTOM OF METADATA
 });

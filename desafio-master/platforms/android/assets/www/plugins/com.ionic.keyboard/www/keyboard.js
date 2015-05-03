@@ -1,4 +1,4 @@
-cordova.define("com.ionic.keyboard.keyboard", function(require, exports, module) {
+cordova.define("com.ionic.keyboard.keyboard", function(require, exports, module) { 
 var argscheck = require('cordova/argscheck'),
     utils = require('cordova/utils'),
     exec = require('cordova/exec');
@@ -11,7 +11,7 @@ Keyboard.hideKeyboardAccessoryBar = function(hide) {
     exec(null, null, "Keyboard", "hideKeyboardAccessoryBar", [hide]);
 };
 
-Keyboard.close = function() {
+Keyboard.close = function() {	
     exec(null, null, "Keyboard", "close", []);
 };
 
