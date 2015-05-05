@@ -1,4 +1,12 @@
 {
   "name": "desafio",
-  "app_id": "cd6b8314"
+  "app_id": "",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }

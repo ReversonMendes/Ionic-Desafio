@@ -68,15 +68,15 @@ angular.module('desafioApp.cadastroCtrl', [])
 
   $scope.atualizarConta = function(usuario){
     var update = "UPDATE USUARIO SET nome = ?, email = ?, usuario = ?, senha = ? WHERE ID = ?";
-    var select = 'SELECT * FROM USUARIO WHERE usuario = ?';
+    var select = 'SELECT * FROM USUARIO WHERE usuario = ? AND id <> ?';
 
-    $cordovaSQLite.execute(db, select,[$scope.usuario.usuario]).then(function(result){
+    $cordovaSQLite.execute(db, select,[$scope.usuario.usuario,$scope.usuario.id]).then(function(result){
       //Valida se já existe um usuário com o mesmo nome.
       if(result.rows.length > 0 ){
         $ionicLoading.show({ template: 'Esse nome de Usuário já existe!', duration: 2000 });
       }else{
         //executa o insert e imprime no log quando inserir ou se aconteceu algum erro.
-        alert(JSON.stringify($scope.usuario));
+        //alert(JSON.stringify($scope.usuario));
         $cordovaSQLite.execute(db, update, [$scope.usuario.nome,$scope.usuario.email,$scope.usuario.usuario, $scope.usuario.senha, $scope.usuario.id]).then(function(result){
           console.log("ATUALIZADO id ->" + result.insertId);
           $ionicLoading.show({ template: 'Conta Atualizada!', duration: 2000 });

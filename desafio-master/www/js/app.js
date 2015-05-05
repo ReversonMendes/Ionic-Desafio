@@ -14,12 +14,17 @@ var desafio = angular.module('desafioApp', ['ionic', 'ngCordova','desafioApp.cad
     }
 
     //inicia o banco sql
-    db = $cordovaSQLite.openDB({ name: "desafio.db"});
+    //db = $cordovaSQLite.openDB({ name: "desafio.db"});
+    db = openDatabase("desafio.db", '1.0', "My WebSQL Database", 2 * 1024 * 1024);
+    db.transaction(function (tx) {
+                tx.executeSql("CREATE TABLE IF NOT EXISTS desafio (id integer primary key, texto text, data text)");
+                tx.executeSql("CREATE TABLE IF NOT EXISTS usuario (id integer primary key, nome text, email text, usuario text, senha text)");
+    });
     //$cordovaSQLite.execute(db,"DROP TABLE IF EXISTS desafio");
     //$cordovaSQLite.execute(db,"DROP TABLE IF EXISTS usuario");
     //Cria a tabela  caso não estiver criada
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS desafio (id integer primary key, texto text, data text)");
-     $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS usuario (id integer primary key, nome text, email text, usuario text, senha text)");
+    //$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS desafio (id integer primary key, texto text, data text)");
+    // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS usuario (id integer primary key, nome text, email text, usuario text, senha text)");
     console.log("TABELA CRIADA");
   });
 });
